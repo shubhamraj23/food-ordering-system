@@ -6,8 +6,10 @@
 #include <utility>
 #include <vector>
 #include "Restaurant.hpp"
+#include "OrderItem.hpp"
 
 class Restaurant;
+class OrderItem;
 
 class RestaurantManager {
   public:

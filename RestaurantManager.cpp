@@ -1,12 +1,14 @@
 #include <iostream>
 #include "RestaurantManager.hpp"
 
+// Function to add a restaurant to the list of restaurants.
 void RestaurantManager::addRestaurant(std::string name, std::vector< std::pair<std::string, int> > items, int capacity) {
   std::unordered_map<std::string, Item*> menu = RestaurantManager::generateMenu(items);
   Restaurant* restaurant = new Restaurant(name, menu, capacity);
   this->restaurants[name] = restaurant;
 }
 
+// Function to update the menu of a restaurant.
 void RestaurantManager::updateMenu(std::string name, std::vector< std::pair<std::string, int> > items) {
   Restaurant* restaurant = this->restaurants[name];
   std::unordered_map<std::string, Item*> newMenu = RestaurantManager::generateMenu(items);
@@ -18,6 +20,7 @@ void RestaurantManager::updateMenu(std::string name, std::vector< std::pair<std:
   restaurant->updateMenu(menu);
 }
 
+// Function to print the details of all the restaurants.
 void RestaurantManager::printRestaurantDetails() {
   for (auto i = this->restaurants.begin(); i != this->restaurants.end(); i++) {
     Restaurant* restaurant = i->second;
@@ -34,6 +37,7 @@ void RestaurantManager::printRestaurantDetails() {
   }
 }
 
+// Static function to generate a restaurant menu from the list of items specified.
 std::unordered_map<std::string, Item*> RestaurantManager::generateMenu(std::vector< std::pair<std::string, int> > items) {
   std::unordered_map<std::string, Item*> menu;
   for (int i = 0; i < items.size(); i++) {
@@ -45,6 +49,7 @@ std::unordered_map<std::string, Item*> RestaurantManager::generateMenu(std::vect
   return menu;
 }
 
+// Function to find the list of restaurants available to pick an order from all the restaurants.
 std::vector<Restaurant*> RestaurantManager::findAvailableRestaurants() {
   std::vector<Restaurant*> availableRestaurants;
   for (auto i = this->restaurants.begin(); i != this->restaurants.end(); i++) {
@@ -54,6 +59,7 @@ std::vector<Restaurant*> RestaurantManager::findAvailableRestaurants() {
   return availableRestaurants;
 }
 
+// Function to find the list of restaurants that can serve the given items.
 std::vector<Restaurant*> RestaurantManager::findServableRestaurants(std::vector<OrderItem*> orderItems) {
   std::vector<Restaurant*> availableRestaurants = this->findAvailableRestaurants();
   std::vector<Restaurant*> servableRestaurants;
@@ -72,6 +78,7 @@ std::vector<Restaurant*> RestaurantManager::findServableRestaurants(std::vector<
   return servableRestaurants;
 }
 
+// Function to calculate the total cost of the order.
 int RestaurantManager::calculateCost(std::string restaurantName, std::vector<OrderItem*> orderItems) {
   Restaurant* restaurant = this->restaurants[restaurantName];
   int cost = 0;

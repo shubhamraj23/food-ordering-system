@@ -4,10 +4,8 @@
 #include <unordered_map>
 #include <vector>
 #include "Item.hpp"
-#include "Order.hpp"
 
 class Item;
-class Order;
 
 class Restaurant {
   private:
@@ -15,7 +13,6 @@ class Restaurant {
     std::unordered_map<std::string, Item*> menu;
     int capacity;
     int capacityInUse;
-    std::vector<Order*> orders;
 
   public:
     Restaurant();
@@ -28,8 +25,6 @@ class Restaurant {
     void decrementCapacityInUse();
     std::unordered_map<std::string, Item*> getMenu();
     void updateMenu(std::unordered_map<std::string, Item*> newMenu);
-    std::vector<Order*> getOrders();
-    void addOrder(Order* order);
     bool getAvailability();
 };
 
